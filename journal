@@ -1,0 +1,30 @@
+APPS
+Routes
+	- main							DESCRIPTION				AUTHORIZED			ROLES
+		/ 							landing page			everyone		 	 -
+		/home 						home page				login				all
+
+	- accounts (login)	
+		/profile					current user profile
+		/profile?nav=groups			current user's groups
+		/profile?nav=files			current user's files
+		/user/<username>			other users' profile
+		/forgot_password
+		/reset_password
+		/change_password
+		** CRUD **
+
+	- auth
+		/auth/login					login view
+		/auth/signup				signup view
+	
+	- groups
+		/group/<group_id>			groups' profile
+			** CRUD **
+
+		/group/<group_id>?nav=files	
+		/group/<group_id>?nav=users
+
+	- files
+		/files/<file_id>	view file
+			** CRUD **
