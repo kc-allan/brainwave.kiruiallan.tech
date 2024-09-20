@@ -1,0 +1,42 @@
+<div id="groups-list" class="flex flex-col items-center bg-white p-5 h-[100%] w-[100%]">
+	{% with groups = current_user.groups %}
+	{% if groups %}
+	<div class="flex flex-col w-[100%] h-[100%] items-center">
+		<div class="flex grid grid-cols-10 items-center w-[100%] bg-gray-200">
+			<h1 class="flex justify-center w-[100%] font-bold col-span-8">Groups</h1>
+			<a class="flex items-center justify-center bg-blue-200 w-[fit-content] p-2 m-2 col-span-2 rounded-md text-center text-lg font-bold" href="/groups/create">
+				<h1 class="md:hidden mx-2 text-3xl">+</h1><h1 class="hidden md:flex"> Create Group</h1>
+			</a>
+		</div>
+		{% for group in groups %}
+		<a href="{% if group.chat_id == None %}
+					/groups/{{group.id}}
+				{% else %}
+					/chats/{{group.chat_id}}
+				{% endif %}
+				"
+			class="flex border-b-2 w-[100%] hover:bg-gray-200 cursor-pointer">
+			<img class="m-5 rounded-full" style="width: 50px; height: 50px;" src="../../{{group.profilePic}}" alt="">
+			<div class="flex flex-col justify-center p-2">
+				<h1>{{group.name}}</h1>
+				<h3>~ {{group.description}}</h3>
+			</div>
+		</a>
+		{% endfor %}
+	</div>
+	{% else %}
+	<div class="flex flex-col items-center justify-center h-[100%]">
+		<h1 class="p-2">You've not joined any groups</h1>
+		<a href="{{url_for('groups.create_group')}}" class="flex items-center p-2 bg-blue-200 rounded-md">
+			<img class="w-[50px]  h-[50px] mx-2" src="../static/icons/group.png" alt="">
+			<div class="flex flex-col items-center w-[100%] h-[100%]">
+				<h1 class="text-lg font-bold">Create Group</h1>
+				<h3 class="text-xs">Connect with peers</h3>
+			</div>
+		</a>
+		<h1>or</h1>
+		<input class="border-2 h-[40px] p-2 outline-none" type="text" placeholder="Enter invite code...">
+	</div>
+	{% endif %}
+	{% endwith %}
+</div>

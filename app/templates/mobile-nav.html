@@ -1,0 +1,66 @@
+<div class="lg:hidden sticky flex space-x-[20%] justify-center bottom-0 z-10 border-t-2 w-screen *:h-[100%] text-center bg-white
+			*:flex *:justify-center *:items-center">
+	<div id="groups-icon-mobile" class="mobile w-[30px] border-t-2 border-gray-500 cursor-pointer">
+		<img src="../static/icons/group.png" alt="">
+	</div>
+	<div id="chats-icon-mobile" class="w-[30px] cursor-pointer border-gray-500">
+		<img src="../static/icons/chat.png" alt="">
+	</div>
+	<!-- NOTIFICATIONS -->
+	<div id="notifications-icon-mobile" class="w-[30px] cursor-pointer border-gray-500">
+		<img src="../static/icons/notifications-white.svg" alt="">
+	</div>
+	<div id="calendar-icon-mobile" class="w-[30px] cursor-pointer border-gray-500">
+		<img src="../static/icons/calendar.png" alt="">
+	</div>
+</div>
+<script>
+	const groupsIconMobile = document.querySelector('#groups-icon-mobile')
+	const chatsIconMobile = document.querySelector('#chats-icon-mobile')
+	const calendarIconMobile = document.querySelector('#calendar-icon-mobile')
+	const mobileNotificationsIcon = document.querySelector('#notifications-icon-mobile')
+
+	mobileNotificationsIcon.addEventListener('click', () => {
+		groupsIconMobile.classList.remove('border-t-2')
+		chatsIconMobile.classList.remove('border-t-2')
+		calendarIconMobile.classList.remove('border-t-2')
+		mobileNotificationsIcon.classList.add('border-t-2')
+		chatsList.classList.add('hidden')
+		calendarSchedules.classList.add('hidden')
+		groupsList.classList.add('hidden')
+		mobileNotifications.classList.remove('hidden')
+	})
+
+	groupsIconMobile.addEventListener('click', () => {
+		groupsIconMobile.classList.add('border-t-2')
+		chatsIconMobile.classList.remove('border-t-2')
+		calendarIconMobile.classList.remove('border-t-2')
+		mobileNotificationsIcon.classList.remove('border-t-2')
+		chatsList.classList.add('hidden')
+		calendarSchedules.classList.add('hidden')
+		groupsList.classList.remove('hidden')
+		mobileNotifications.classList.add('hidden')
+	})
+
+	chatsIconMobile.addEventListener('click', () => {
+		chatsIconMobile.classList.add('border-t-2')
+		groupsIconMobile.classList.remove('border-t-2')
+		calendarIconMobile.classList.remove('border-t-2')
+		mobileNotificationsIcon.classList.remove('border-t-2')
+		groupsList.classList.add('hidden')
+		chatsList.classList.remove('hidden')
+		calendarSchedules.classList.add('hidden')
+		mobileNotifications.classList.add('hidden')
+	})
+
+	calendarIconMobile.addEventListener('click', () => {
+		chatsIconMobile.classList.remove('border-t-2')
+		groupsIconMobile.classList.remove('border-t-2')
+		calendarIconMobile.classList.add('border-t-2')
+		mobileNotificationsIcon.classList.remove('border-t-2')
+		groupsList.classList.remove('hidden')
+		chatsList.classList.remove('hidden')
+		calendarSchedules.classList.remove('hidden')
+		mobileNotifications.classList.add('hidden')
+	})
+</script>

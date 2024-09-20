@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Not Found{% endblock title %}
+{% block content %}
+<div class="flex flex-col items-center pt-5 right-[15%] md:right-[25%] top-[25%] md:top-[10%] w-[75%] h-[200px] md:h-[75%] md:w-[50%] bg-gray-50 absolute shadow-2xl rounded-md">
+	<div class="w-[70%] h-[70%]" style="background-image: url(../static/images/another-404.gif); border-radius: 10px; margin: 10px; background-position: center; background-size: cover; background-repeat: no-repeat;">
+	</div>
+	<a href="/home"><button class="bg-emerald-300 p-2 m-2">Go Home</button></a>
+</div>
+{% endblock content %}

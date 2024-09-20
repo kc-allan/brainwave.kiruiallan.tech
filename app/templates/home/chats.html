@@ -1,0 +1,42 @@
+<div id="chats-list" class="hidden flex flex-col items-center bg-white p-5 h-[100%] w-[100%] overflow-y-scroll">
+	{% with chats = current_user.chats %}
+	{% if chats %}
+	{% for chat in chats %}
+	<h1>{{chat}}</h1>
+	{% endfor %}
+	{% else %}
+	<div class="flex flex-col items-center justify-center p-2">
+		<a href="{{url_for('groups.create_group')}}" class="flex items-center p-2 bg-blue-200 rounded-md">
+			<img class="w-[50px]  h-[50px] mx-2" src="../static/icons/group.png" alt="">
+			<div class="flex flex-col items-center w-[100%] h-[100%]">
+				<h1 class="text-lg font-bold">Start Conversation</h1>
+				<h3 class="text-xs">Connect with peers</h3>
+			</div>
+		</a>
+		<input class="border-2 h-[40px] p-2 outline-none" type="text" placeholder="Enter username...">
+	</div>
+	<details style="transition: .3s ease;" close class="flex flex-col w-[100%] border-t-2">
+		<summary class="text-lg font-bold border-b-2 p-2 cursor-pointer">Suggestions</summary>
+		<ul id="chat-suggestions" class="">
+			{% for user in suggested_users %}
+			{% if not user == current_user %}
+			<li id="suggested-user.{{user.username}}" class="flex items-center border-b-2 hover:bg-gray-200 cursor-pointer">
+					<img class="w-[50px] h-[50px] m-2" src="../{{user.profilePic}}" alt="">
+					<h1>{{user.firstname}} {{user.lastname}}</h1>
+			</li>
+			{%endif%}
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+	{% endwith %}
+</div>
+<script>
+	const suggestedUser = document.querySelectorAll('#chat-suggestion li')
+	suggestedUser.addEventListener('click', () => {
+		api = 'http://127.0.0.1:5000/api/v1/chats'
+		$.get(api, {
+			
+		})
+	})
+</script>

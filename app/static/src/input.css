@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	.striped li:nth-child(odd) {
+		@apply bg-blue-200
+	}
+	.striped li:nth-child(even) {
+		@apply bg-gray-200
+	}
+	.shadow {
+		box-shadow: 0 2px 6px 2px gray;
+	}
+}
+#loading-gif {
+	width: 100%;
+	background-image: url('../../images/loading.gif');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+#nav-menu {
+	transition: .3s ease;
+	animation-delay: 2ms;
+}
+#ham-menu span {
+	transition: .3s ease;
+}
+#ham-menu.active span:nth-child(1) {
+	top: 50%;
+	transform: rotate(45deg);
+}
+#ham-menu.active span:nth-child(2) {
+	opacity: 0;
+}
+
+#ham-menu.active span:nth-child(3) {
+	top: 50%;
+	transform: rotate(-45deg);
+}
+#dropdown ul,
+#toggle {
+	transition: .3s ease;
+}
+#toggle.rotate {
+	transform: rotate(180deg);
+}
+
+#dropdown ul.active {
+	position: absolute;
+	top: -300px;
+}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Chats {% endblock title %}
+{% include 'header.html' %}
+{% block content %}
+<!-- CONTAINER -->
+<div id="chats-container" class="w-[100%] h-[100%] flex md:gap-5">
+	<!-- NAV-PANE -->
+	<div id="navigation-pane" class="hidden md:flex flex-col items-center w-[25%] h-[100%] p-2">
+		<input class="w-[50%]" type="text" placeholder="Search Chats..">
+		<ul class="h-[100%] w-[100%]">
+			<li>Chat One</li>
+			<li>Group</li>
+		</ul>
+	</div>
+	<!-- CHAT WINDOW -->
+	<div id="chat-window" class="w-[100%] md:w-[75%] h-[100%] mr-2 border-2">
+		<!-- HEADER -->
+		<div id="chat-header" class="grid grid-cols-5 items-center pl-10 w-[100%] bg-gray-200">
+			<img style="float: left; width: 50px; height: 50px;" src="../static/images/sample_dp.png" alt=""
+			class="my-2 bg-blue-200">
+			<h1 class="col-span-3 w-[100%] h-[100%]">Allan Kirui</h1>
+			<div class="h-[30px] w-[30px] absolute flex flex-col items-center rounded-full right-10 cursor-pointer
+			*:w-[5px] *:h-[5px] *:bg-black *:rounded-full *:absolute">
+				<span class="top-[25%]"></span>
+				<span class="top-[50%]"></span>
+				<span class="top-[75%]"></span>
+			</div>
+		</div>
+		<!-- CHAT BODY -->
+		<div id="chat-body" class="w-[100%]">
+			<ul id="chat-body">
+				{% for message in chat %}
+				<li>{{message}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<!-- MESSAGE INPUT -->
+		<div id="chat-footer" class="absolute bottom-0 grid grid-cols-10 w-[100%]">
+			<input class="col-span-8" type="text" placeholder="Type message...">
+			<input class="col-span-2" type="submit" value="Send">
+		</div>
+	</div>
+</div>
+{% endblock content %}

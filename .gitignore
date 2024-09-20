@@ -1,0 +1,7 @@
+__pycache__
+
+.env
+journal
+config.py
+
+tmp/

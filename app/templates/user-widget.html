@@ -1,0 +1,30 @@
+<div id="navigation" class="hidden lg:flex flex-col bg-white w-[25%] h-[50%] top-0 p-2">
+	<!-- ROW ONE -->
+	<div class="flex items-center border-b-2 p-2">
+		<div class="h-[50px] w-[50px] rounded-full border-2 border-gray-300"
+			style="background-image: url('../{{current_user.profilePic}}'); background-size: contain; background-repeat: no-repeat;">
+		</div>
+		<div class="flex w-[75%] items-center flex-col">
+			<h1 class="font-bold text-lg">{{current_user.firstname}} {{current_user.lastname}}</h1>
+			<h3 class="text-xs">@{{current_user.username}}</h3>
+		</div>
+		<a href="{{url_for('accounts.settings')}}" class="w-[20px] h-[20px]"
+			style="background-image: url('../static/icons/settings.svg'); background-size: contain; background-repeat: no-repeat;">
+		</a>
+	</div>
+	<!-- ROW TWO -->
+	<div class="flex flex-col items-center h-[60%] border-b-2">
+		{% for chat in current_user.chats %}
+		<h1>{{chat.participants[0]}}</h1>
+		{%endfor%}
+	</div>
+	<!-- ROW THREE -->
+	<div class="flex items-center">
+		<a href="{{url_for('main.help')}}" class="flex w-[100%] items-center justify-center">
+			<div class="w-[30px] h-[30px]"
+				style="background-image: url('../static/icons/help-chat.png'); background-size: contain; background-repeat: no-repeat;">
+			</div>
+			<h1 class="text-blue-500 p-2">Help & Feedback</h1>
+		</a>
+	</div>
+</div>

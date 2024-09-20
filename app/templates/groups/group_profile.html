@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% block content %}
+<div class="flex w-[100%] h-screen justify-center md:p-2 gap-5 *:rounded-sm bg-gray-200">
+	{% include 'user-widget.html' %}
+	<div class="w-[100%] md:w-[75%] border-2 flex flex-col flex-grow h-[fit-content">
+		<div id="profile-header" class="relative flex w-[100%] p-2 h-[25%] bg-gray-200">
+			<div class="rounded-full relative cursor-pointer ml-[5%]"
+				style="background-image: url('../{{profilePic}}?{{cache_id}}'); background-repeat: no-repeat; background-size: contain; width: 100px; height: 100px;">
+				{% if current_user in group.admins %}
+				<div
+					class="absolute flex items-center justify-center text-white bg-blue-500 p-3 rounded-full h-[20px] w-[20px] bottom-0 right-2">
+					+</div>
+				{% endif %}
+			</div>
+			{% if current_user not in members %}
+			<div class="absolute right-2 bottom-0 h-[fit-content] w-[fit-content]  py-2">
+				<a href="{{url_for('.join_group', group_id=group.id)}}?next=/groups/{{group.id}}"
+					class="flex flex justify-center items-center font-bold rounded-md bg-emerald-300 p-2">
+					<h1 class="text-3xl md:text-[1.5rem] h-[2.5rem] w-[2.5rem] text-center">+ </h1>
+					<h1 class="hidden md:flex">Join Group</h1>
+				</a>
+			</div>
+			{% endif %}
+			<div class="flex flex-row space-x-2 absolute right-10 bottom-0 h-[fit-content] w-[fit-content]  py-2">
+				{% if current_user in members %}
+				{% if current_user in group.admins %}
+				<a href="{{url_for('.delete_group', group_id=group.id)}}?next=/groups/{{group.id}}"
+					class="flex flex justify-center items-center font-bold rounded-md bg-red-400 p-2">
+					<h1 class="hidden md:flex">Delete Group</h1>
+				</a>
+				{% endif %}
+				<a href="{{url_for('.leave_group', group_id=group.id)}}?next=/accounts/profile"
+					class="flex flex justify-center items-center font-bold rounded-md bg-emerald-300 p-2">
+					<h1 class="hidden md:flex">Exit Group</h1>
+				</a>
+				{% endif %}
+			</div>
+		</div>
+		<div id="details" class="flex flex-col flex-grow w-[100%] overflow-y-scroll bg-white">
+			<nav id="details-navbar" class="flex flex-row w-[100%] *:cursor-pointer">
+				<div id="members-nav" class="text-[1.5rem] text-center border-b-black border-2 w-[100%] py-2">
+					Members
+				</div>
+				<div id="files-nav" class="text-[1.5rem] text-center border-2 w-[100%] py-2">
+					Files
+				</div>
+			</nav>
+
+			<div id="members-list" class="relative flex flex-col flex-grow py-5 items-center">
+				<div class="grid grid-cols-10 w-[50%] h-[50px] border-2 flex items-center rounded-md">
+					<input id="search-members" class="m-2 h-[100%] outline-none col-span-10 " type="text"
+						placeholder="Search Members..">
+				</div>
+				{% if not members %}
+				<h1>No members</h1>
+				{%else%}
+				<ul id="members" class="flex mt-2 flex-col items-center justify-center w-[100%] md:w-[50%]">
+					{% for member in members %}
+					<li
+						class="relative grid grid-cols-5 grid-flow-row flex items-center justify-center w-[100%] text-center rounded-md border-b-2">
+						<div class="rounded-full m-2 relative cursor-pointer border-2 border-black float-left ml-10px bg-gray-200"
+							style="background-image: url('../{{member.profilePic}}?{{cache_id}}'); background-repeat: no-repeat; background-size: contain; width: 60px; height: 60px;">
+						</div>
+						<a href="/profile/{{member.username}}"
+							class="col-span-3 w-[50%] h-[100%] text-[1.3rem] p-2 w-[70%] border-r-10">
+							<h1 class="font-bold">{{ member.firstname}} {{member.lastname}}</h1>
+							<h4 class="text-sm">@{{member.username}}</h4>
+						</a>
+						{% if member in group.admins %}
+						<h1
+							class="flex justify-center items-center font-bold h-[fit-content] w-[fit-content] rounded-md bg-green-200 p-2">
+							ADMIN
+						</h1>
+						{% endif %}
+					</li>
+					{% endfor %}
+				</ul>
+				{%endif%}
+			</div>
+
+			<div id="files-list" class="hidden flex flex-col items-center m-5">
+				{% if files == [] %}
+				<h1 class="py-5 font-bold text-[1.5rem] border-b-2">No files to display</h1>
+				{% else %}
+				{% for file in files %}
+				<ul class="justify-center grid grid-cols-3 md:grid-cols-5 gap-5 w-[100%] md:w-[75%]">
+					{% with path = file.filepath %}
+					<li class="h-[100px] rounded-none"
+						style="background-image: url('../{{file.filepath}}{{file.filename}}'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+					</li>
+					{% endwith %}
+				</ul>
+				{% endfor %}
+				{% endif %}
+			</div>
+
+		</div>
+	</div>
+</div>
+<script src="../../static/scripts/group_profile.js"></script>
+{% endblock content %}

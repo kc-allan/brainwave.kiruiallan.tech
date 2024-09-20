@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} BrainWave {% endblock title %}
+{% include 'header.html' %}
+{% block content %}
+<!-- style="background-image: url(../static/images/bgImage1.jpeg); background-repeat: no-repeat; background-size: cover; background-position: center;" -->
+<div class="flex w-[100%] h-screen justify-center md:p-2 gap-5 *:rounded-sm bg-gray-300">
+	{% include 'user-widget.html' %}
+	<!-- MAIN PAGE -->
+	<div class="w-[100%] md:w-[75%]">
+		{% include 'schedule/calendar_schedule.html' %}
+
+		{% include 'home/groups.html' %}
+		
+		{% include 'home/chats.html' %}
+
+		{% include 'notifications_page.html' %}
+	</div>
+</div>
+<script src="../static/scripts/home.js"></script>
+{% include 'mobile-nav.html' %}
+{% endblock content %}

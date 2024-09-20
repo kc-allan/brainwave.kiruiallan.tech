@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} BrainWave {% endblock title %}
+{% block content %}
+<div class="flex border-b-2 bg-gray-200">
+	<div class="h-15 bg-transparent border-r-2 w-auto cursor-pointer border-gray-300 border-r-2">
+		<h1 class="m-4 text-base lg:text-3xl text-center font-bold">BrainWave</h1>
+	</div>
+	<div class="flex flex-col m-4 w-3/4 h-10">
+		<div class="flex flex-row float-right relative gap-5 md:gap-10 *:w-1/3 *:h-10 *:cursor-pointer *:rounded-md *:text-center
+		*:shadow-2xl *:pt-[0.5rem] ">
+			<a class="hover:opacity-75 bg-blue-300" href="/auth/login">
+				<div>Log In</div>
+			</a>
+			<a class="hover:opacity-75 bg-blue-300" href="/auth/signup">
+				<div>Sign Up</div>
+			</a>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="flex flex-col [100%] h-screen justify-center items-center"
+	style="background-image: url(../static/images/bgImage1.jpeg); background-repeat: no-repeat; background-size: cover; background-position: center;">
+	<div class="h-[100%] w-[100%] bg-gray-500 opacity-80"></div>
+	<div
+		class="absolute top-[25%] left-[15%] md:left-[25%] bg-gray-300 w-[75%] md:w-[50%] h-[300px] flex flex-col items-center justify-center z-10 rounded-sm shadow">
+		<h1 class="flex font-bold text-sm md:text-3xl p-3 m-3 text-center">
+			The Ultimate Collaboration Liason.
+		</h1>
+		<form action="/auth/login" method="post">
+			<input class="hidden" name="username" type="text" value="testuser">
+			<input class="hidden" name="password" type="text" value="Pa$$word1">
+			<input type="submit" value="View Demo"
+				class="flex font-bold text-md bg-emerald-300 p-3 rounded-md cursor-pointer w-[fit-content]">
+		</form>
+	</div>
+</div>
+</div>
+<script>
+	const demo = document.querySelector('#demo')
+	const url = 'http://localhost:5000/auth/login'
+	demo.addEventListener('click', () => {
+		fetch(url, {
+			method: ['post'],
+			body: JSON.stringify({
+				'username': 'testuser',
+				'password': 'Pa$$word1'
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		}).then((resp) => {
+			console.log(resp)
+		}).catch((error) => {
+			console.error(error)
+		})
+	});
+</script>
+{% endblock content %}
+{% include 'footer.html' %}
